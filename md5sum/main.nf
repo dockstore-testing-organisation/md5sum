@@ -3,15 +3,21 @@
 params.inputFile = 'md5sum.input'
 
 inputFile = file(params.inputFile)
+md5sumScript = file('bin/my_md5sum')
 
 process md5sum {
+    container 'quay.io/agduncan94/my-m5dsum'
+
     input:
     file inputFile 
+    file md5sumScript
 
     output:
-    stdout outputChannel
+    file 'md5sum.txt' into outputChannel
 
     """
-    /bin/my_md5sum ${inputFile}
+    bash ${md5sumScript} ${inputFile}
     """
 }
+
+outputChannel.subscribe { print it.text }
