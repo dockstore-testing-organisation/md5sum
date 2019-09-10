@@ -21,12 +21,12 @@ outputs:
 
 steps:
   md5sum:
-    run: md5sum/md5sum.cwl
+    run: https://raw.githubusercontent.com/dockstore-testing-organisation/md5sum/master/md5sum/md5sum.cwl
     in:
       input_file: input_file
     out: [output_file]
   checker:
-    run: checker/md5sum_checker.cwl
+    run: https://raw.githubusercontent.com/dockstore-testing-organisation/md5sum/master/checker/md5sum_checker.cwl
     in:
       input_file: md5sum/output_file
       expected_md5: expected_md5
